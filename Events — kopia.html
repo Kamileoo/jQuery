@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>jQuery</title>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script type="text/javascript">
+         $(function () {
+             $('td').one('click', edit);
+         });
+    function edit(event) {
+        let newi = document.createElement("input");
+        newi.type = "text";
+        newi.id = "edit";
+        newi.value = event.target.innerHTML;
+        event.target.parentElement.replaceChild(newi,event.target);
+        $('#edit').focus();
+        $('#edit').blur(end_edit);
+    }
+
+    function end_edit(event) {
+        let newi = document.createElement("td");
+        newi.innerHTML = event.target.value;
+        event.target.parentElement.replaceChild(newi,event.target);
+        $('td').one('click', edit);
+    }
+  </script>
+</head>
+<body>
+    <table>
+        <tr><td>One</td></tr>
+        <tr><td>Two</td></tr>
+        <tr><td>Three</td></tr>
+        <tr><td>...</td></tr>
+    </table>
+</body>
+</html>

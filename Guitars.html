@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <style>
+        a { margin: 10px; }
+        #content { border: 1px solid black; padding: 20px; width: 50%; }
+    </style>
+    <script type="text/javascript">
+        $(function () {
+            $('#load').click(function () {
+                $('#content').fadeOut();
+                $("#content dl").html("")
+                $.getJSON("guitars.json", function(data) {
+                    $.each(data, function(key, value) {
+                        $.each(value, function(nkey, nvalue) {
+                            $.each(nvalue, function(nnkey, nnvalue) {
+                                $("#content dl").append("<dt>" + nnvalue['Brand'] + "</dt>")
+                                $("#content dl").append("<dd>" + nnvalue['Model'] + "</dd>")
+                            });
+                        });
+                    });
+                });
+                $('#content').fadeIn();
+                return false;
+            });
+        });
+    </script>
+</head>
+<body>
+    <button id="load">Load</button>
+    <div id="content">
+        <dl>
+
+        </dl>
+    </div>
+</body>
+</html>
